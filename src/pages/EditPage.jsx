@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editNote, getNote } from '../utils/local-data';
 import { FaCheck } from 'react-icons/fa';
+import parser from 'html-react-parser';
 
 function EditPage() {
   const { id } = useParams();
@@ -56,10 +57,9 @@ function EditPage() {
         </p>
         <div
           className='edit-page__input__body'
-          contentEditable='true'
-          dangerouslySetInnerHTML={{ __html: state.body }}
+          contentEditable="true"
           onBlur={onBodyChangeEventHandler}
-        ></div>
+        >{parser(state.body)}</div>
       </div>
       <div className='edit-page__action'>
         <button

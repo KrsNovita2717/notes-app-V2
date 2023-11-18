@@ -23,6 +23,14 @@ function AddNewInput() {
     }
   };
 
+  const onBodyChangeEventHandler = (event) => {
+    const bodyContent = event.target.innerHTML;
+    setState((prevState) => ({
+      ...prevState,
+      body: bodyContent,
+    }));
+  };
+
   const onSaveHandler = () => {
     const { title, body } = state;
     addNote({ title, body });
@@ -44,9 +52,9 @@ function AddNewInput() {
         </p>
         <div
           className='add-new-page__input__body'
-          contentEditable='true'
           data-placeholder='Mau nulis...'
-          value={state.body}
+          contentEditable
+          onInput={onBodyChangeEventHandler}
         ></div>
       </div>
       <AddNewAction saveHandler={onSaveHandler} />

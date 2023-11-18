@@ -43,6 +43,7 @@ NoteDetail.propTypes = {
   archiveHandler: PropTypes.func.isRequired,
   unarchiveHandler: PropTypes.func.isRequired,
   deleteHandler: PropTypes.func.isRequired,
+  editHandler: PropTypes.func.isRequired,
 };
 
 export default NoteDetail;

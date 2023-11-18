@@ -88,10 +88,14 @@ main {
   border-radius: 8px;
   border: 1px solid var(--on-background);
   border-top: 5px solid;
+  max-width: 250px;
 }
 
 .note-item__title {
   margin: 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .note-item__createdAt {
