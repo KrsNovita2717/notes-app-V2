@@ -10,6 +10,7 @@ class RegisterInput extends React.Component {
       email: '',
       password: '',
       confirmPassword: '',
+      showPassword: false,
       passwordMatchError: '',
     }
  
@@ -77,7 +78,7 @@ class RegisterInput extends React.Component {
         <label htmlFor="email">Email</label>
         <input type="email" value={this.state.email} onChange={this.onEmailChange} />
         <label htmlFor="password">Password</label>
-        <input type="password" autoComplete='current-password' value={this.state.password} onChange={this.onPasswordChange} />
+        <input type="password" autoComplete='current-password' minLength='6' value={this.state.password} onChange={this.onPasswordChange} />
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input type="password" value={this.state.confirmPassword} onChange={this.onConfirmPasswordChange} />
         {this.state.passwordMatchError && (

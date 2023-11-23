@@ -1,65 +1,76 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import AddNewAction from './AddNewAction';
-import { useNavigate } from 'react-router-dom';
-import { addNote } from '../utils/local-data';
 
-function AddNewInput() {
-  const navigate = useNavigate();
-  const [state, setState] = useState({
-    title: '',
-    body: '',
-    charLimit: 50,
-  });
+class AddNewInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      body: '',
+      charLimit: 50,
+    };
 
-  const onTitleChangeEventHandler = (event) => {
+    this.onChangeTitleEventHandler = this.onChangeTitleEventHandler.bind(this);
+    this.onInputBodyEventHandler = this.onInputBodyEventHandler.bind(this);
+    this.onSaveHandler = this.onSaveHandler.bind(this);
+  }
+
+  onChangeTitleEventHandler(event) {
     const inputText = event.target.value;
-    const remainingChars = state.charLimit - inputText.length;
+    const remainingChars = this.state.charLimit - inputText.length;
 
     if (remainingChars >= 0) {
-      setState((prevState) => ({
-        ...prevState,
-        title: inputText,
-      }));
+      this.setState(() => {
+        return {
+          title: inputText,
+        };
+      });
     }
-  };
+  }
 
-  const onBodyChangeEventHandler = (event) => {
-    const bodyContent = event.target.innerHTML;
-    setState((prevState) => ({
-      ...prevState,
-      body: bodyContent,
-    }));
-  };
+  onInputBodyEventHandler(event) {
+    this.setState(() => {
+      return {
+        body: event.target.innerHTML,
+      };
+    });
+  }
 
-  const onSaveHandler = () => {
-    const { title, body } = state;
-    addNote({ title, body });
-    navigate('/');
-  };
+  onSaveHandler(event) {
+    event.preventDefault();
+    this.props.addNote(this.state);
+  }
 
-  return (
-    <>
+  render() {
+    return (
+      <>
       <div className='add-new-page__input'>
         <input
           className='add-new-page__input__title'
           type='text'
           placeholder='Judul catatan'
-          value={state.title}
-          onChange={onTitleChangeEventHandler}
+          value={this.state.title}
+          onChange={this.onChangeTitleEventHandler}
         />
         <p className='add-new-page__input__title__char-limit'>
-          Sisa Karakter: {state.charLimit - state.title.length}
+          Sisa Karakter: {this.state.charLimit - this.state.title.length}
         </p>
         <div
           className='add-new-page__input__body'
           data-placeholder='Mau nulis...'
           contentEditable
-          onInput={onBodyChangeEventHandler}
+          onInput={this.onInputBodyEventHandler}
         ></div>
       </div>
-      <AddNewAction saveHandler={onSaveHandler} />
-    </>
-  );
+      <AddNewAction saveHandler={this.onSaveHandler}/>
+      </>
+    );
+  }
 }
+
+AddNewInput.propTypes = {
+  addNote: PropTypes.func.isRequired,
+};
 
 export default AddNewInput;

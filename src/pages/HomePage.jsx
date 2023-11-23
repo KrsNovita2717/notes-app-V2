@@ -1,5 +1,5 @@
 import React from 'react';
-import { getActiveNotes } from '../utils/local-data';
+import { getActiveNotes } from '../utils/api';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
 import HomepageAction from '../components/HomePageAction';
@@ -8,13 +8,22 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: getActiveNotes(),
-      keyword: '',
+      notes: [],
+      keyword: props.defaultKeyword || '',
     };
 
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
   }
 
+  async componentDidMount() {
+    const { data } = await getActiveNotes();
+
+    this.setState(() => {
+      return {
+        notes: data,
+      }
+    })
+  }
   onKeywordChangeHandler(keyword) {
     this.setState(() => {
       return {

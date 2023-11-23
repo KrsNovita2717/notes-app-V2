@@ -11,6 +11,7 @@ function NoteDetail({
   editHandler,
 }) {
   const { id, title, createdAt, body, archived } = note;
+  console.log(note);
   return (
     <>
       <h3 className='detail-page__title'>{title}</h3>

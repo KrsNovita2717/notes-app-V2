@@ -1,5 +1,5 @@
 import React from 'react';
-import { RxPlus } from 'react-icons/rx';
+import { FiPlus } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
 function HomepageAction() {
@@ -13,7 +13,7 @@ function HomepageAction() {
         title='Tambah'
         onClick={() => navigate('/notes/new')}
       >
-        <RxPlus />
+        <FiPlus />
       </button>
     </div>
   );

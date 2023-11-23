@@ -9,7 +9,7 @@ function AddNewAction({ saveHandler }) {
         className='action'
         type='button'
         title='Simpan'
-        onClick={() => saveHandler()}
+        onClick={(event) => saveHandler(event)}
       >
         <FaCheck />
       </button>

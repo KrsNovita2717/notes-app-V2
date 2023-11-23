@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaDownload, FaTrash, FaUpload, FaEdit } from 'react-icons/fa';
+import { FiDownload, FiTrash, FiUpload, FiEdit } from 'react-icons/fi';
+
 
 function DetailAction({
   id,
@@ -11,7 +12,7 @@ function DetailAction({
   editHandler,
 }) {
   const archiveTitleButton = archived ? 'Aktifkan' : 'Arsipkan';
-  const archiveIconButton = archived ? FaUpload : FaDownload;
+  const archiveIconButton = archived ? FiUpload : FiDownload;
   const archiveHandlerButton = archived
     ? () => unarchiveHandler(id)
     : () => archiveHandler(id);
@@ -24,7 +25,7 @@ function DetailAction({
         title='Edit'
         onClick={() => editHandler()}
       >
-        <FaEdit />
+        <FiEdit />
       </button>
       <button
         className='action'
@@ -40,7 +41,7 @@ function DetailAction({
         title='Hapus'
         onClick={() => deleteHandler(id)}
       >
-        <FaTrash />
+        <FiTrash />
       </button>
     </div>
   );
